@@ -1,0 +1,30 @@
+# Dockerfile para desenvolvimento com hot reload
+FROM golang:1.24-alpine
+
+# Instalar dependências necessárias
+RUN apk add --no-cache git ca-certificates tzdata make
+
+# Instalar air para hot reload (novo repositório)
+RUN go install github.com/air-verse/air@latest
+
+# Instalar ferramentas do SQLBoiler
+RUN go install github.com/volatiletech/sqlboiler/v4@latest && \
+    go install github.com/volatiletech/sqlboiler/v4/drivers/sqlboiler-psql@latest
+
+# Instalar Goose para migrations
+RUN go install github.com/pressly/goose/v3/cmd/goose@latest
+
+# Definir diretório de trabalho
+WORKDIR /app
+
+# Copiar arquivos de dependências
+COPY go.mod go.sum ./
+
+# Baixar dependências
+RUN go mod download
+
+# Expor porta
+EXPOSE 8080
+
+# Comando padrão (pode ser sobrescrito)
+CMD ["air", "-c", ".air.toml"]

@@ -1,0 +1,69 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: hacka_postgres_dev
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - hacka_network
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: hacka_backend_dev
+    ports:
+      - "8080:8080"
+    environment:
+      - API_PORT=8080
+      - JWT_SECRET=my_secret_key_for_development
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=admin
+      - DB_PASSWORD=admin
+      - DB_NAME=postgres
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - .:/app
+      - go_mod_cache:/go/pkg/mod
+    working_dir: /app
+    networks:
+      - hacka_network
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+
+  adminer:
+    image: adminer:latest
+    container_name: hacka_adminer_dev
+    ports:
+      - "8081:8080"
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+      ADMINER_DESIGN: hydra
+    depends_on:
+      - db
+    networks:
+      - hacka_network
+    restart: unless-stopped
+
+networks:
+  hacka_network:
+    driver: bridge
+
+volumes:
+  postgres_data_dev:
+  go_mod_cache:

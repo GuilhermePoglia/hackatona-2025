@@ -1,0 +1,27 @@
+[psql]
+dbname  = "postgres"
+host    = "db"
+port    = 5432
+user    = "admin"
+pass    = "admin"
+sslmode = "disable"
+blacklist = ["goose_db_version"]
+
+# Configurações de geração
+output          = "core/models"
+wipe            = true
+no-tests        = false
+no-hooks        = false
+no-auto-timestamps = false
+add-global-variants = true
+add-panic-variants  = true
+
+# Configurações de struct tags
+tag-ignore = ["boil", "json"]
+
+# Configurações de relacionamentos
+relationships = true
+
+# Configurações de tipos
+[psql.replace]
+"uuid" = "github.com/gofrs/uuid.UUID"
