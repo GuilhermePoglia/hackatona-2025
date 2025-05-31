@@ -85,3 +85,20 @@ func (s *ActivityService) GetActivitiesByType(ctx context.Context, activityType 
 		qm.OrderBy("created_at DESC"),
 	).All(ctx, s.DB)
 }
+
+func (s *ActivityService) GetActivitiesByAverageRanking(ctx context.Context, limit int) (models.ActivitySlice, error) {
+	query := models.Activities(
+		qm.Where("average IS NOT NULL"),
+		qm.OrderBy("average DESC"),
+	)
+
+	if limit > 0 {
+		query = models.Activities(
+			qm.Where("average IS NOT NULL"),
+			qm.OrderBy("average DESC"),
+			qm.Limit(limit),
+		)
+	}
+
+	return query.All(ctx, s.DB)
+}

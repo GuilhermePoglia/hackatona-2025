@@ -229,51 +229,61 @@ func seedActivities(ctx context.Context, db boil.ContextExecutor) {
 			Name:        null.StringFrom("Sprint Planning Meeting"),
 			Description: null.StringFrom("Weekly meeting for sprint activity planning"),
 			Type:        null.StringFrom("meeting"),
+			Average:     null.Float64From(4.2),
 		},
 		{
 			Name:        null.StringFrom("Security Training"),
 			Description: null.StringFrom("Mandatory training on workplace safety practices"),
 			Type:        null.StringFrom("training"),
+			Average:     null.Float64From(3.8),
 		},
 		{
 			Name:        null.StringFrom("Innovation Workshop"),
 			Description: null.StringFrom("Workshop for developing new ideas and innovative solutions"),
 			Type:        null.StringFrom("workshop"),
+			Average:     null.Float64From(4.7),
 		},
 		{
 			Name:        null.StringFrom("Code Review Session"),
 			Description: null.StringFrom("Collaborative code review session"),
 			Type:        null.StringFrom("development"),
+			Average:     null.Float64From(4.5),
 		},
 		{
 			Name:        null.StringFrom("Daily Stand-up"),
 			Description: null.StringFrom("Daily team alignment meeting"),
 			Type:        null.StringFrom("meeting"),
+			Average:     null.Float64From(3.9),
 		},
 		{
 			Name:        null.StringFrom("Advanced Git Training"),
 			Description: null.StringFrom("Training on advanced Git features"),
 			Type:        null.StringFrom("training"),
+			Average:     null.Float64From(4.3),
 		},
 		{
 			Name:        null.StringFrom("Sprint Retrospective"),
 			Description: null.StringFrom("Meeting for process analysis and continuous improvement"),
 			Type:        null.StringFrom("meeting"),
+			Average:     null.Float64From(4.1),
 		},
 		{
 			Name:        null.StringFrom("Internal Hackathon"),
 			Description: null.StringFrom("48-hour event for developing innovative projects"),
 			Type:        null.StringFrom("event"),
+			Average:     null.Float64From(4.9),
 		},
 		{
 			Name:        null.StringFrom("Project Presentation"),
 			Description: null.StringFrom("Presentation of project results to stakeholders"),
 			Type:        null.StringFrom("presentation"),
+			Average:     null.Float64From(4.0),
 		},
 		{
 			Name:        null.StringFrom("Technical Mentorship"),
 			Description: null.StringFrom("Mentoring session for technical development"),
 			Type:        null.StringFrom("mentoring"),
+			Average:     null.Float64From(4.6),
 		},
 	}
 

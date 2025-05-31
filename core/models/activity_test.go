@@ -568,7 +568,7 @@ func testActivitiesSelect(t *testing.T) {
 }
 
 var (
-	activityDBTypes = map[string]string{`ID`: `uuid`, `Name`: `character varying`, `Description`: `text`, `Type`: `character varying`, `CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`}
+	activityDBTypes = map[string]string{`ID`: `uuid`, `Name`: `character varying`, `Description`: `text`, `Type`: `character varying`, `CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `Average`: `double precision`, `Image`: `character varying`}
 	_               = bytes.MinRead
 )
 

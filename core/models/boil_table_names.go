@@ -5,11 +5,13 @@ package models
 
 var TableNames = struct {
 	Activity string
+	Benefit  string
 	Employee string
 	Feedback string
 	Resource string
 }{
 	Activity: "activity",
+	Benefit:  "benefit",
 	Employee: "employee",
 	Feedback: "feedback",
 	Resource: "resource",

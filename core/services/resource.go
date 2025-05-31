@@ -86,3 +86,20 @@ func (s *ResourceService) GetResourcesByType(ctx context.Context, resourceType s
 		qm.OrderBy("created_at DESC"),
 	).All(ctx, s.DB)
 }
+
+func (s *ResourceService) GetResourcesByAverageRanking(ctx context.Context, limit int) (models.ResourceSlice, error) {
+	query := models.Resources(
+		qm.Where("average IS NOT NULL"),
+		qm.OrderBy("average DESC"),
+	)
+
+	if limit > 0 {
+		query = models.Resources(
+			qm.Where("average IS NOT NULL"),
+			qm.OrderBy("average DESC"),
+			qm.Limit(limit),
+		)
+	}
+
+	return query.All(ctx, s.DB)
+}

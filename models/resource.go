@@ -31,6 +31,7 @@ type Resource struct {
 	Average   null.Float64 `boil:"average" json:"average,omitempty" toml:"average" yaml:"average,omitempty"`
 	CreatedAt null.Time    `boil:"created_at" json:"created_at,omitempty" toml:"created_at" yaml:"created_at,omitempty"`
 	UpdatedAt null.Time    `boil:"updated_at" json:"updated_at,omitempty" toml:"updated_at" yaml:"updated_at,omitempty"`
+	Image     null.String  `boil:"image" json:"image,omitempty" toml:"image" yaml:"image,omitempty"`
 
 	R *resourceR `boil:"-" json:"-" toml:"-" yaml:"-"`
 	L resourceL  `boil:"-" json:"-" toml:"-" yaml:"-"`
@@ -44,6 +45,7 @@ var ResourceColumns = struct {
 	Average   string
 	CreatedAt string
 	UpdatedAt string
+	Image     string
 }{
 	ID:        "id",
 	Name:      "name",
@@ -52,6 +54,7 @@ var ResourceColumns = struct {
 	Average:   "average",
 	CreatedAt: "created_at",
 	UpdatedAt: "updated_at",
+	Image:     "image",
 }
 
 var ResourceTableColumns = struct {
@@ -62,6 +65,7 @@ var ResourceTableColumns = struct {
 	Average   string
 	CreatedAt string
 	UpdatedAt string
+	Image     string
 }{
 	ID:        "resource.id",
 	Name:      "resource.name",
@@ -70,6 +74,7 @@ var ResourceTableColumns = struct {
 	Average:   "resource.average",
 	CreatedAt: "resource.created_at",
 	UpdatedAt: "resource.updated_at",
+	Image:     "resource.image",
 }
 
 // Generated where
@@ -82,6 +87,7 @@ var ResourceWhere = struct {
 	Average   whereHelpernull_Float64
 	CreatedAt whereHelpernull_Time
 	UpdatedAt whereHelpernull_Time
+	Image     whereHelpernull_String
 }{
 	ID:        whereHelperstring{field: "\"resource\".\"id\""},
 	Name:      whereHelpernull_String{field: "\"resource\".\"name\""},
@@ -90,6 +96,7 @@ var ResourceWhere = struct {
 	Average:   whereHelpernull_Float64{field: "\"resource\".\"average\""},
 	CreatedAt: whereHelpernull_Time{field: "\"resource\".\"created_at\""},
 	UpdatedAt: whereHelpernull_Time{field: "\"resource\".\"updated_at\""},
+	Image:     whereHelpernull_String{field: "\"resource\".\"image\""},
 }
 
 // ResourceRels is where relationship names are stored.
@@ -109,9 +116,9 @@ func (*resourceR) NewStruct() *resourceR {
 type resourceL struct{}
 
 var (
-	resourceAllColumns            = []string{"id", "name", "type", "midia", "average", "created_at", "updated_at"}
+	resourceAllColumns            = []string{"id", "name", "type", "midia", "average", "created_at", "updated_at", "image"}
 	resourceColumnsWithoutDefault = []string{}
-	resourceColumnsWithDefault    = []string{"id", "name", "type", "midia", "average", "created_at", "updated_at"}
+	resourceColumnsWithDefault    = []string{"id", "name", "type", "midia", "average", "created_at", "updated_at", "image"}
 	resourcePrimaryKeyColumns     = []string{"id"}
 	resourceGeneratedColumns      = []string{}
 )

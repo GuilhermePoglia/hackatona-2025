@@ -568,7 +568,7 @@ func testResourcesSelect(t *testing.T) {
 }
 
 var (
-	resourceDBTypes = map[string]string{`ID`: `uuid`, `Name`: `character varying`, `Type`: `character varying`, `Midia`: `text`, `Average`: `double precision`, `CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`}
+	resourceDBTypes = map[string]string{`ID`: `uuid`, `Name`: `character varying`, `Type`: `character varying`, `Midia`: `text`, `Average`: `double precision`, `CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `Image`: `character varying`}
 	_               = bytes.MinRead
 )
 

@@ -24,12 +24,14 @@ import (
 
 // Activity is an object representing the database table.
 type Activity struct {
-	ID          string      `boil:"id" json:"id" toml:"id" yaml:"id"`
-	Name        null.String `boil:"name" json:"name,omitempty" toml:"name" yaml:"name,omitempty"`
-	Description null.String `boil:"description" json:"description,omitempty" toml:"description" yaml:"description,omitempty"`
-	Type        null.String `boil:"type" json:"type,omitempty" toml:"type" yaml:"type,omitempty"`
-	CreatedAt   null.Time   `boil:"created_at" json:"created_at,omitempty" toml:"created_at" yaml:"created_at,omitempty"`
-	UpdatedAt   null.Time   `boil:"updated_at" json:"updated_at,omitempty" toml:"updated_at" yaml:"updated_at,omitempty"`
+	ID          string       `boil:"id" json:"id" toml:"id" yaml:"id"`
+	Name        null.String  `boil:"name" json:"name,omitempty" toml:"name" yaml:"name,omitempty"`
+	Description null.String  `boil:"description" json:"description,omitempty" toml:"description" yaml:"description,omitempty"`
+	Type        null.String  `boil:"type" json:"type,omitempty" toml:"type" yaml:"type,omitempty"`
+	CreatedAt   null.Time    `boil:"created_at" json:"created_at,omitempty" toml:"created_at" yaml:"created_at,omitempty"`
+	UpdatedAt   null.Time    `boil:"updated_at" json:"updated_at,omitempty" toml:"updated_at" yaml:"updated_at,omitempty"`
+	Average     null.Float64 `boil:"average" json:"average,omitempty" toml:"average" yaml:"average,omitempty"`
+	Image       null.String  `boil:"image" json:"image,omitempty" toml:"image" yaml:"image,omitempty"`
 
 	R *activityR `boil:"-" json:"-" toml:"-" yaml:"-"`
 	L activityL  `boil:"-" json:"-" toml:"-" yaml:"-"`
@@ -42,6 +44,8 @@ var ActivityColumns = struct {
 	Type        string
 	CreatedAt   string
 	UpdatedAt   string
+	Average     string
+	Image       string
 }{
 	ID:          "id",
 	Name:        "name",
@@ -49,6 +53,8 @@ var ActivityColumns = struct {
 	Type:        "type",
 	CreatedAt:   "created_at",
 	UpdatedAt:   "updated_at",
+	Average:     "average",
+	Image:       "image",
 }
 
 var ActivityTableColumns = struct {
@@ -58,6 +64,8 @@ var ActivityTableColumns = struct {
 	Type        string
 	CreatedAt   string
 	UpdatedAt   string
+	Average     string
+	Image       string
 }{
 	ID:          "activity.id",
 	Name:        "activity.name",
@@ -65,6 +73,8 @@ var ActivityTableColumns = struct {
 	Type:        "activity.type",
 	CreatedAt:   "activity.created_at",
 	UpdatedAt:   "activity.updated_at",
+	Average:     "activity.average",
+	Image:       "activity.image",
 }
 
 // Generated where
@@ -180,6 +190,44 @@ func (w whereHelpernull_Time) GTE(x null.Time) qm.QueryMod {
 func (w whereHelpernull_Time) IsNull() qm.QueryMod    { return qmhelper.WhereIsNull(w.field) }
 func (w whereHelpernull_Time) IsNotNull() qm.QueryMod { return qmhelper.WhereIsNotNull(w.field) }
 
+type whereHelpernull_Float64 struct{ field string }
+
+func (w whereHelpernull_Float64) EQ(x null.Float64) qm.QueryMod {
+	return qmhelper.WhereNullEQ(w.field, false, x)
+}
+func (w whereHelpernull_Float64) NEQ(x null.Float64) qm.QueryMod {
+	return qmhelper.WhereNullEQ(w.field, true, x)
+}
+func (w whereHelpernull_Float64) LT(x null.Float64) qm.QueryMod {
+	return qmhelper.Where(w.field, qmhelper.LT, x)
+}
+func (w whereHelpernull_Float64) LTE(x null.Float64) qm.QueryMod {
+	return qmhelper.Where(w.field, qmhelper.LTE, x)
+}
+func (w whereHelpernull_Float64) GT(x null.Float64) qm.QueryMod {
+	return qmhelper.Where(w.field, qmhelper.GT, x)
+}
+func (w whereHelpernull_Float64) GTE(x null.Float64) qm.QueryMod {
+	return qmhelper.Where(w.field, qmhelper.GTE, x)
+}
+func (w whereHelpernull_Float64) IN(slice []float64) qm.QueryMod {
+	values := make([]interface{}, 0, len(slice))
+	for _, value := range slice {
+		values = append(values, value)
+	}
+	return qm.WhereIn(fmt.Sprintf("%s IN ?", w.field), values...)
+}
+func (w whereHelpernull_Float64) NIN(slice []float64) qm.QueryMod {
+	values := make([]interface{}, 0, len(slice))
+	for _, value := range slice {
+		values = append(values, value)
+	}
+	return qm.WhereNotIn(fmt.Sprintf("%s NOT IN ?", w.field), values...)
+}
+
+func (w whereHelpernull_Float64) IsNull() qm.QueryMod    { return qmhelper.WhereIsNull(w.field) }
+func (w whereHelpernull_Float64) IsNotNull() qm.QueryMod { return qmhelper.WhereIsNotNull(w.field) }
+
 var ActivityWhere = struct {
 	ID          whereHelperstring
 	Name        whereHelpernull_String
@@ -187,6 +235,8 @@ var ActivityWhere = struct {
 	Type        whereHelpernull_String
 	CreatedAt   whereHelpernull_Time
 	UpdatedAt   whereHelpernull_Time
+	Average     whereHelpernull_Float64
+	Image       whereHelpernull_String
 }{
 	ID:          whereHelperstring{field: "\"activity\".\"id\""},
 	Name:        whereHelpernull_String{field: "\"activity\".\"name\""},
@@ -194,6 +244,8 @@ var ActivityWhere = struct {
 	Type:        whereHelpernull_String{field: "\"activity\".\"type\""},
 	CreatedAt:   whereHelpernull_Time{field: "\"activity\".\"created_at\""},
 	UpdatedAt:   whereHelpernull_Time{field: "\"activity\".\"updated_at\""},
+	Average:     whereHelpernull_Float64{field: "\"activity\".\"average\""},
+	Image:       whereHelpernull_String{field: "\"activity\".\"image\""},
 }
 
 // ActivityRels is where relationship names are stored.
@@ -213,9 +265,9 @@ func (*activityR) NewStruct() *activityR {
 type activityL struct{}
 
 var (
-	activityAllColumns            = []string{"id", "name", "description", "type", "created_at", "updated_at"}
+	activityAllColumns            = []string{"id", "name", "description", "type", "created_at", "updated_at", "average", "image"}
 	activityColumnsWithoutDefault = []string{}
-	activityColumnsWithDefault    = []string{"id", "name", "description", "type", "created_at", "updated_at"}
+	activityColumnsWithDefault    = []string{"id", "name", "description", "type", "created_at", "updated_at", "average", "image"}
 	activityPrimaryKeyColumns     = []string{"id"}
 	activityGeneratedColumns      = []string{}
 )

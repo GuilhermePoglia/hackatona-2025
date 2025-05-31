@@ -3,6 +3,7 @@ package controllers
 import (
 	"hacka/core/services"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -23,6 +24,7 @@ func SetupActivityRoutes(router *gin.RouterGroup, service *services.ActivityServ
 	activities := router.Group("/activities")
 	{
 		activities.GET("", controller.GetAllActivities)
+		activities.GET("/ranking", controller.GetActivitiesByAverageRanking)
 		activities.GET("/:id", controller.GetActivityByID)
 		activities.POST("", controller.CreateActivity)
 		activities.PUT("/:id", controller.UpdateActivity)
@@ -160,4 +162,36 @@ func (ctrl *ActivityController) GetActivitiesByType(c *gin.Context) {
 		"data":  activities,
 		"type":  activityType,
 	})
+}
+
+func (ctrl *ActivityController) GetActivitiesByAverageRanking(c *gin.Context) {
+	limitStr := c.DefaultQuery("limit", "0")
+	limit := 0
+
+	if limitStr != "0" {
+		if parsedLimit, err := strconv.Atoi(limitStr); err == nil && parsedLimit > 0 {
+			limit = parsedLimit
+		}
+	}
+
+	activities, err := ctrl.service.GetActivitiesByAverageRanking(c.Request.Context(), limit)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error":   "Error fetching activity ranking",
+			"details": err.Error(),
+		})
+		return
+	}
+
+	response := gin.H{
+		"data":         activities,
+		"count":        len(activities),
+		"ranking_type": "average",
+	}
+
+	if limit > 0 {
+		response["limit"] = limit
+	}
+
+	c.JSON(http.StatusOK, response)
 }

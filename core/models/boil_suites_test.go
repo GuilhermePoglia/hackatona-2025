@@ -13,6 +13,7 @@ import "testing"
 // Separating the tests thusly grants avoidance of Postgres deadlocks.
 func TestParent(t *testing.T) {
 	t.Run("Activities", testActivities)
+	t.Run("Benefits", testBenefits)
 	t.Run("Employees", testEmployees)
 	t.Run("Feedbacks", testFeedbacks)
 	t.Run("Resources", testResources)
@@ -20,6 +21,7 @@ func TestParent(t *testing.T) {
 
 func TestDelete(t *testing.T) {
 	t.Run("Activities", testActivitiesDelete)
+	t.Run("Benefits", testBenefitsDelete)
 	t.Run("Employees", testEmployeesDelete)
 	t.Run("Feedbacks", testFeedbacksDelete)
 	t.Run("Resources", testResourcesDelete)
@@ -27,6 +29,7 @@ func TestDelete(t *testing.T) {
 
 func TestQueryDeleteAll(t *testing.T) {
 	t.Run("Activities", testActivitiesQueryDeleteAll)
+	t.Run("Benefits", testBenefitsQueryDeleteAll)
 	t.Run("Employees", testEmployeesQueryDeleteAll)
 	t.Run("Feedbacks", testFeedbacksQueryDeleteAll)
 	t.Run("Resources", testResourcesQueryDeleteAll)
@@ -34,6 +37,7 @@ func TestQueryDeleteAll(t *testing.T) {
 
 func TestSliceDeleteAll(t *testing.T) {
 	t.Run("Activities", testActivitiesSliceDeleteAll)
+	t.Run("Benefits", testBenefitsSliceDeleteAll)
 	t.Run("Employees", testEmployeesSliceDeleteAll)
 	t.Run("Feedbacks", testFeedbacksSliceDeleteAll)
 	t.Run("Resources", testResourcesSliceDeleteAll)
@@ -41,6 +45,7 @@ func TestSliceDeleteAll(t *testing.T) {
 
 func TestExists(t *testing.T) {
 	t.Run("Activities", testActivitiesExists)
+	t.Run("Benefits", testBenefitsExists)
 	t.Run("Employees", testEmployeesExists)
 	t.Run("Feedbacks", testFeedbacksExists)
 	t.Run("Resources", testResourcesExists)
@@ -48,6 +53,7 @@ func TestExists(t *testing.T) {
 
 func TestFind(t *testing.T) {
 	t.Run("Activities", testActivitiesFind)
+	t.Run("Benefits", testBenefitsFind)
 	t.Run("Employees", testEmployeesFind)
 	t.Run("Feedbacks", testFeedbacksFind)
 	t.Run("Resources", testResourcesFind)
@@ -55,6 +61,7 @@ func TestFind(t *testing.T) {
 
 func TestBind(t *testing.T) {
 	t.Run("Activities", testActivitiesBind)
+	t.Run("Benefits", testBenefitsBind)
 	t.Run("Employees", testEmployeesBind)
 	t.Run("Feedbacks", testFeedbacksBind)
 	t.Run("Resources", testResourcesBind)
@@ -62,6 +69,7 @@ func TestBind(t *testing.T) {
 
 func TestOne(t *testing.T) {
 	t.Run("Activities", testActivitiesOne)
+	t.Run("Benefits", testBenefitsOne)
 	t.Run("Employees", testEmployeesOne)
 	t.Run("Feedbacks", testFeedbacksOne)
 	t.Run("Resources", testResourcesOne)
@@ -69,6 +77,7 @@ func TestOne(t *testing.T) {
 
 func TestAll(t *testing.T) {
 	t.Run("Activities", testActivitiesAll)
+	t.Run("Benefits", testBenefitsAll)
 	t.Run("Employees", testEmployeesAll)
 	t.Run("Feedbacks", testFeedbacksAll)
 	t.Run("Resources", testResourcesAll)
@@ -76,6 +85,7 @@ func TestAll(t *testing.T) {
 
 func TestCount(t *testing.T) {
 	t.Run("Activities", testActivitiesCount)
+	t.Run("Benefits", testBenefitsCount)
 	t.Run("Employees", testEmployeesCount)
 	t.Run("Feedbacks", testFeedbacksCount)
 	t.Run("Resources", testResourcesCount)
@@ -83,6 +93,7 @@ func TestCount(t *testing.T) {
 
 func TestHooks(t *testing.T) {
 	t.Run("Activities", testActivitiesHooks)
+	t.Run("Benefits", testBenefitsHooks)
 	t.Run("Employees", testEmployeesHooks)
 	t.Run("Feedbacks", testFeedbacksHooks)
 	t.Run("Resources", testResourcesHooks)
@@ -91,6 +102,8 @@ func TestHooks(t *testing.T) {
 func TestInsert(t *testing.T) {
 	t.Run("Activities", testActivitiesInsert)
 	t.Run("Activities", testActivitiesInsertWhitelist)
+	t.Run("Benefits", testBenefitsInsert)
+	t.Run("Benefits", testBenefitsInsertWhitelist)
 	t.Run("Employees", testEmployeesInsert)
 	t.Run("Employees", testEmployeesInsertWhitelist)
 	t.Run("Feedbacks", testFeedbacksInsert)
@@ -101,6 +114,7 @@ func TestInsert(t *testing.T) {
 
 func TestReload(t *testing.T) {
 	t.Run("Activities", testActivitiesReload)
+	t.Run("Benefits", testBenefitsReload)
 	t.Run("Employees", testEmployeesReload)
 	t.Run("Feedbacks", testFeedbacksReload)
 	t.Run("Resources", testResourcesReload)
@@ -108,6 +122,7 @@ func TestReload(t *testing.T) {
 
 func TestReloadAll(t *testing.T) {
 	t.Run("Activities", testActivitiesReloadAll)
+	t.Run("Benefits", testBenefitsReloadAll)
 	t.Run("Employees", testEmployeesReloadAll)
 	t.Run("Feedbacks", testFeedbacksReloadAll)
 	t.Run("Resources", testResourcesReloadAll)
@@ -115,6 +130,7 @@ func TestReloadAll(t *testing.T) {
 
 func TestSelect(t *testing.T) {
 	t.Run("Activities", testActivitiesSelect)
+	t.Run("Benefits", testBenefitsSelect)
 	t.Run("Employees", testEmployeesSelect)
 	t.Run("Feedbacks", testFeedbacksSelect)
 	t.Run("Resources", testResourcesSelect)
@@ -122,6 +138,7 @@ func TestSelect(t *testing.T) {
 
 func TestUpdate(t *testing.T) {
 	t.Run("Activities", testActivitiesUpdate)
+	t.Run("Benefits", testBenefitsUpdate)
 	t.Run("Employees", testEmployeesUpdate)
 	t.Run("Feedbacks", testFeedbacksUpdate)
 	t.Run("Resources", testResourcesUpdate)
@@ -129,6 +146,7 @@ func TestUpdate(t *testing.T) {
 
 func TestSliceUpdateAll(t *testing.T) {
 	t.Run("Activities", testActivitiesSliceUpdateAll)
+	t.Run("Benefits", testBenefitsSliceUpdateAll)
 	t.Run("Employees", testEmployeesSliceUpdateAll)
 	t.Run("Feedbacks", testFeedbacksSliceUpdateAll)
 	t.Run("Resources", testResourcesSliceUpdateAll)
