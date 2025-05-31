@@ -40,6 +40,9 @@ make logs           # Ver logs
 make migrate        # Aplicar migrations
 make generate       # Gerar modelos
 make clean          # Limpar tudo
+
+# Seeder (Popular banco com dados de exemplo)
+go run cmd/seeder/seeder.go    # Executar seeder
 ```
 
 ## ❓ **Por que SEM entrypoint?**
@@ -49,6 +52,31 @@ make clean          # Limpar tudo
 - ✅ Pode regenerar modelos quando quiser
 - ✅ Mais fácil debugar problemas
 - ✅ Não precisa esperar scripts automáticos
+
+## 🌱 Seeder - Dados de Exemplo
+
+O seeder popula o banco com dados realísticos para desenvolvimento e testes:
+
+### 📊 Dados Criados:
+- **👥 Funcionários**: 10 funcionários com cargos variados (Desenvolvedor, Product Manager, Designer, etc.)
+- **📦 Recursos**: 8 recursos (notebooks, monitores, licenças de software, salas)
+- **📅 Atividades**: 10 atividades (reuniões, treinamentos, workshops, etc.)
+- **💬 Feedbacks**: 15 feedbacks aleatórios entre funcionários com ratings de 1-5 estrelas
+
+### 🚀 Como Usar:
+```bash
+# Executar o seeder
+go run cmd/seeder/seeder.go
+
+# O seeder detecta automaticamente se já existem dados
+# e pergunta se você quer adicionar mais
+```
+
+### ✨ Funcionalidades:
+- ✅ **Inteligente**: Detecta dados existentes e pergunta antes de duplicar
+- ✅ **Realístico**: Dados com nomes, descrições e relacionamentos coerentes
+- ✅ **Automático**: Calcula automaticamente médias e balanços de feedback
+- ✅ **Resumo**: Mostra estatísticas finais após execução
 
 ## 🗄️ Estrutura do Banco
 
