@@ -20,6 +20,7 @@ func Setup(router *gin.Engine, db *sql.DB) {
 	feedbackService := services.NewFeedbackService(db, employeeService)
 	resourceService := services.NewResourceService(db)
 	activityService := services.NewActivityService(db)
+	benefitService := services.NewBenefitService(db)
 
 	v1 := router.Group("/api/v1")
 
@@ -27,6 +28,7 @@ func Setup(router *gin.Engine, db *sql.DB) {
 	controllers.SetupFeedbackRoutes(v1, feedbackService)
 	controllers.SetupResourceRoutes(v1, resourceService)
 	controllers.SetupActivityRoutes(v1, activityService)
+	controllers.SetupBenefitRoutes(v1, benefitService)
 	router.GET("/ping", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, gin.H{"message": "pong"})
 	})
